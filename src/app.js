@@ -1,4 +1,5 @@
-
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./swagger');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -17,5 +18,6 @@ app.use('/api', authRoutes);
 app.use('/api/questions', questionRoutes);
 app.use('/api/exams', examRoutes);
 app.use('/api/reports', reportRoutes);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 module.exports = app;
