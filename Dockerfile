@@ -1,13 +1,15 @@
+
 FROM node:18
 
 WORKDIR /app
 
-# Only copy what we need
 COPY package*.json ./
-
 RUN npm install
 
-# Copy the rest of the app
 COPY . .
 
-CMD ["npm", "start"]
+RUN npm run prisma:generate
+RUN npm run build
+
+EXPOSE 3000
+CMD ["node", "dist/index.js"]
